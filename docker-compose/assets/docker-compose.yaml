@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:11.5.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Gully#Trinity2#Purse
+      MYSQL_USER:  devsecops
+      MYSQL_PASSWORD: Unpaired#Oblivion#Crazily8
+      MYSQL_DATABASE: pilot
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+     - ./mysql:/var/lib/mysql
+    networks:
+      - db
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.1
+    restart: always
+    environment:
+      PMA_HOST: mariadb
+    ports:
+      - "8080:80"
+    networks:
+      - db
+
+networks:
+    db:

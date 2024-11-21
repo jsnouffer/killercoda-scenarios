@@ -1,0 +1,25 @@
+{
+  "title": "Docker Compose",
+  "description": "Simple docker compose demo",
+  "details": {
+    "steps": [
+      {
+        "title": "MariaDB + phpMyAdmin docker compose example",
+        "text": "step1.md"
+      }
+    ],
+    "assets": {
+      "host01": [
+        {"file": "docker-compose.yaml", "target": "~/", "chmod": "+w"}
+      ]
+    }
+  },
+
+  "backend": {
+    "imageid": "ubuntu"
+  },
+
+  "interface": {
+    "layout": "ide"
+  }
+}
