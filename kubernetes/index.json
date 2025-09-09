@@ -1,0 +1,35 @@
+{
+  "title": "Kubernetes (k3s)",
+  "description": "Simple Kubernetes (k3s) demo",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Simple Example – JABD",
+        "text": "step1.md"
+      },
+      {
+        "title": "Simple Example – Part Two",
+        "text": "step2.md"
+      }
+    ],
+    "assets": {
+      "host01": [
+        {"file": "extras/*.yaml", "target": "~/"},
+        {"file": "step1/*.yaml", "target": "~/"},
+        {"file": "step2/*.yaml", "target": "~/"},
+        {"file": "step3/*.yaml", "target": "~/"}
+      ]
+    }
+
+  },
+  "backend": {
+    "imageid": "ubuntu-4GB"
+  },
+  "interface": {
+    "layout": "ide"
+  }
+}

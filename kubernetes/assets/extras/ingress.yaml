@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+  name: devsecops-nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: devsecops-nginx
+            port:
+              number: 80 # CHANGE AS NECESSARY
+        path: /
+        pathType: Prefix
+
