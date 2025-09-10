@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mkdocs-config
+data:
+  mkdocs.yml: |-
+    docs_dir: /docs/killercoda-scenarios/kubernetes/assets/example-docs
+
+    site_name: "DevSecOps MKDocs Demo"
+    edit_uri_template: "{path}?useDefaultHandler=true"
+
+    theme:
+      name: material
+      features:
+        - content.code.copy
+        - content.code.select
+        - content.code.annotate
+        - content.tabs.link
+        - navigation.sections
+        - toc.follow
+        - search.highlight
+      palette:
+        - media: "(prefers-color-scheme)"
+          toggle:
+            icon: material/brightness-auto
+            name: Switch to light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: indigo
+          toggle:
+            icon: material/brightness-7
+            name: Switch to dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: indigo
+          accent: indigo
+          toggle:
+            icon: material/brightness-4
+            name: Switch to system preference
+    exclude_docs: |
+      .*
+
+    extra_css:
+      - stylesheets/style.css
+
+    # see list of installable plugins here: https://github.com/mkdocs/catalog
+    plugins:
+      - search
+      - literate-nav:
+          nav_file: nav.md
+      - macros:
+          render_by_default: false
+
+
+    # see list of extensions here: https://python-markdown.github.io/extensions/
+    markdown_extensions:
+      - sane_lists
+      - toc:
+          permalink: true
+      - codehilite:
+          linenums: true
+      - admonition
+      - nl2br
+      - extra
+      - footnotes
+      - tables
+      - pymdownx.superfences:
+          custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:pymdownx.superfences.fence_div_format
+      - pymdownx.highlight:
+          anchor_linenums: true
+          line_spans: __span
+          pygments_lang_class: true
+      - pymdownx.inlinehilite
+      - pymdownx.snippets
+      - pymdownx.emoji:
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
+      - pymdownx.tabbed:
+          alternate_style: true
+      - pymdownx.details
+      - def_list
+      - pymdownx.tasklist:
+          custom_checkbox: true
+      - pymdownx.critic
+      - pymdownx.caret
+      - pymdownx.keys
+      - pymdownx.mark
+      - pymdownx.tilde
+      - attr_list
+      - md_in_html
+

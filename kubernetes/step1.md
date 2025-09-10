@@ -1,4 +1,4 @@
-#### Let's walkthrough manifests in `~/step1` ----->
+#### Let's walk through manifests in `~/mkdocs` ----->
 
 #### Create new namespace
 
@@ -8,10 +8,14 @@ kubectl create namespace dso-demo
 
 <br>
 
-#### Create deployment and service
+#### Create deployment
 
 ```
-kubectl create -f ~/step1 -n dso-demo
+kubectl create -f ~/mkdocs/deployment.yaml -n dso-demo
+```{{exec}}
+
+```
+kubectl create -f ~/mkdocs/cm.yaml -n dso-demo
 ```{{exec}}
 
 <br>
@@ -27,7 +31,7 @@ kubectl get pods -n dso-demo -o wide
 #### Let’s curl the root of the nginx!
 
 ```
-curl http://POD-IP
+curl http://POD-IP:8000
 ```
 
 <br>
@@ -43,7 +47,7 @@ kubectl delete pods -n dso-demo --all
 #### Let’s curl again...
 
 ```
-curl http://POD-IP
+curl http://POD-IP:8000
 ```
 
 <br>
@@ -59,12 +63,21 @@ kubectl get pods -n dso-demo -o wide
 #### Let’s curl with the new pod IP
 
 ```
-curl http://POD-IP
+curl http://POD-IP:8000
 ```
 
 <br>
 
 #### Is this practical?
+#### Let’s add a service object
+
+```
+kubectl create -f ~/mkdocs/service.yaml -n dso-demo
+```{{exec}}
+
+<br>
+
+
 #### Let’s get the service IP
 
 ```
