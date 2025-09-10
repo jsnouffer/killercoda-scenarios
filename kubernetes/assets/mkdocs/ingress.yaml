@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+  name: mkdocs
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: mkdocs
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix
+

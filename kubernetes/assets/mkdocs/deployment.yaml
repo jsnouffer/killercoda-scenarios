@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mkdocs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mkdocs
+  template:
+    metadata:
+      labels:
+        app: mkdocs
+    spec:
+      initContainers:
+        - name: git-sync
+          image: registry.k8s.io/git-sync/git-sync:v4.4.3
+          restartPolicy: Always
+          env:
+            - name: GITSYNC_REPO
+              value: https://github.com/jsnouffer/killercoda-scenarios
+            - name: GITSYNC_ROOT
+              value: /docs
+            - name: GITSYNC_REF
+              value: main
+            - name: GITSYNC_PERIOD
+              value: 5s
+          volumeMounts:
+            - name: docs
+              mountPath: /docs
+      containers:
+        - name: mkdocs
+          image: minidocks/mkdocs:1
+          command:
+            - mkdocs
+          args:
+            - serve
+            - --dev-addr=0.0.0.0:8000
+            - --config-file=/config/mkdocs.yml
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: docs
+              mountPath: /docs
+      volumes:
+        - name: config
+          configMap:
+            name: mkdocs-config
+            defaultMode: 420
+        - name: docs
+          emptyDir: {}
+

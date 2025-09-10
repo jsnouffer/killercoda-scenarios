@@ -19,6 +19,7 @@
     "assets": {
       "host01": [
         {"file": "extras/*.yaml", "target": "~/"},
+        {"file": "mkdocs/*.yaml", "target": "~/"},
         {"file": "step1/*.yaml", "target": "~/"},
         {"file": "step2/*.yaml", "target": "~/"},
         {"file": "step3/*.yaml", "target": "~/"}
